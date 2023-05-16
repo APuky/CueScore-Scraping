@@ -150,7 +150,7 @@ while True:
             #End other players streak and save streak, start and end
             if playerB_streak > 0:
                 end_of_streak_B = f'{playerA} {lastA} : {scoreB} {playerB}'
-                streak_B = int(end_of_streak_B.split(':')[0].strip().split(' ')[2]) - int(playerB_streak_start.split(':')[0].strip().split(' ')[2])
+                streak_B = int(end_of_streak_B.split(':')[1].strip().split(' ')[0]) - int(playerB_streak_start.split(':')[1].strip().split(' ')[0])
                 temp_list = [streak_B, playerB_streak_start, end_of_streak_B]
                 playerB_streaks.append(temp_list)
                 
