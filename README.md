@@ -2,6 +2,8 @@
 
 //WORK IN PROGRESS --> AN ALTERNATIVE TO WHATSAPP
 
+//BEAUTIFULSOUP4 and SELENIUM are required
+
 CueScore scraper using Python requests, BeautifulSoup4 and Selenium
 
 The purpose of this repo is to learn basics of web scraping and Selenium on a real life example.
