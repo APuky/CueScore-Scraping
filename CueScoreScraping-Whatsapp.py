@@ -15,9 +15,13 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+##THINGS TO CHANGE##
+########################################################################################
 URL_cuescore = "LINK TO TOURNAMENT CUESCORE PAGE"
 matchno = "MATCH NUMBER"
 race_to = "RACE TO AS AN INTEGER EXAMPLE: 4"
+contact = "GROUP NAME OR NUMBER ON WHATSAPP"
+########################################################################################
 
 lastA = 0
 lastB = 0
@@ -52,21 +56,31 @@ def sendMessage(message, select_input):
 
 def getWhatsAppBrowser(message, *args):
     options = Options()
-    options.binary_location = r'PATH\TO\BROWSER BINARY, EXAMPLE: C:\Program Files\Mozilla Firefox\firefox.exe'
-    fp = webdriver.FirefoxProfile(r'PATH\TO\BROWSER PROFILE, EXAMPLE: C:\Users\User\AppData\Roaming\Mozilla\Firefox\Profiles\z5fvolnv.default-release')
-    driver = webdriver.Firefox(fp, options=options, executable_path=r"PATH\TO\BROWSER DRIVER, EXAMPLE: C:\Users\User\Desktop\geckodriver.exe")
-    ## You can use whichever browser you'd like as long as there is a driver that selenium can use. This example is set up for Firefox
+    ##THINGS TO CHANGE##
+    ###############################################################################
+    options.binary_location = r'PATH\TO\BROWSER BINARY' ##EXAMPLE: r'C:\Program Files\Mozilla Firefox\firefox.exe'
+    fp = webdriver.FirefoxProfile(r'PATH\TO\BROWSER PROFILE') ##EXAMPLE: r'C:\Users\User\AppData\Roaming\Mozilla\Firefox\Profiles\z5fvolnv.default-release'
+    driver = webdriver.Firefox(fp, options=options, executable_path=r'PATH\TO\BROWSER DRIVER') ##EXAMPLE: r'C:\Users\User\Desktop\geckodriver.exe'
+    ##https://github.com/mozilla/geckodriver/releases
+    ###############################################################################
+    ## You can use whichever browser you'd like as long as there is a driver that selenium can use. This example is set up for Firefox.
     ## The PROFILE PATH is needed so that you don't have to manually scan the WhatsApp Web QR code to login everytime a message needs to be sent.
     ## This further means that you need to manually login into WhatsApp with firefox before you run this code, otherwise it will NOT WORK.
-    ## You also have to send a message to yourself over WhatsApp before you run this code, otherwise the code will NOT WORK.
     ## Your phone has to be connected to the internet during the execution of this code as WhatsApp on desktop will NOT WORK if your phone cannot be reached.
     
     ## Even with all these steps, there is a chance that WhatsApp will not send/receive or be able to display the messages sent by the code.
+    
     driver.get("https://web.whatsapp.com/")
     driver.implicitly_wait(10)
 
-    select_chat = driver.find_element(By.CSS_SELECTOR, "[data-testid='message-yourself-row']")
-    select_chat.click()
+    select_contact = driver.find_element(By.CSS_SELECTOR, "[data-testid='chat-list-search']")
+    select_contact.click()
+    
+    for x in contact:
+        select_contact.send_keys(x)
+    time.sleep(1)
+    select_contact.send_keys(Keys.ENTER)
+    time.sleep(3)
 
     driver.implicitly_wait(5)
 
